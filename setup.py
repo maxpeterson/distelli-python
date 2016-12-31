@@ -10,7 +10,7 @@ with open(os.path.join(os.path.abspath(os.path.dirname(__file__)), 'README.md'),
 
 setup(
     name='distelli',
-    version='0.1,0',
+    version='0.1.0',
     description=u' '.join(distelli.__doc__.splitlines()).strip(),
     long_description=readme,
     packages=find_packages(),
