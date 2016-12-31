@@ -1,3 +1,6 @@
+import pytest
+
+from distelli import DistelliException
 from fixtures import client
 
 
@@ -14,7 +17,6 @@ class TestApp(object):
         client_instance = client()
         for app in client_instance.apps():
             if app['name'] not in self.__original_apps:
-                print('delete_app', app['name'])
                 client_instance.delete_app(app['name'])
 
     def test_apps(self, client):
@@ -31,3 +33,15 @@ class TestApp(object):
     def test_delete_app(self, client):
         client.delete_app(self.app_name)
         assert self.app_name not in [app['name'] for app in client.apps()]
+
+    def test_app_does_not_exist(self, client):
+        with pytest.raises(DistelliException) as exception:
+            client.app('does-not-exist')
+
+        assert 'App does-not-exist not found' in str(exception.value)
+
+    def test_delete_app_does_not_exist(self, client):
+        with pytest.raises(DistelliException) as exception:
+            client.delete_app('does-not-exist')
+
+        assert 'App does-not-exist not found' in str(exception.value)

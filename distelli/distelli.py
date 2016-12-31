@@ -83,21 +83,80 @@ class Distelli(object):
     # Apps
 
     def apps(self):
-        """Get a list of all apps in your account."""
+        """Get a list of all apps."""
         return self.__rest_helper('/apps', method='GET')['apps']
 
     def app(self, app_name):
-        """Get the details for a specific app in your account."""
+        """Get the details for a specific app."""
         url = '/apps/{name}'.format(name=app_name)
         return self.__rest_helper(url, method='GET')['app']
 
     def create_app(self, app_name, description=''):
-        """Create an application in your account."""
+        """Create an application."""
         data = {'description': description}
         url = '/apps/{name}'.format(name=app_name)
         return self.__rest_helper(url, data, method='PUT')['app']
 
     def delete_app(self, app_name):
-        """Delete an application in your Distelli account."""
+        """Delete an application."""
         url = '/apps/{name}'.format(name=app_name)
+        return self.__rest_helper(url, method='DELETE')
+
+    # Environments
+
+    def envs(self):
+        """Get a list of environments."""
+        return self.__rest_helper('/envs', method='GET')['envs']
+
+    def env(self, env_name):
+        """Get the details for a specific environment."""
+        url = '/envs/{name}'.format(name=env_name)
+        return self.__rest_helper(url, method='GET')['env']
+
+    def create_env(self, app_name, env_name, description=''):
+        """Create an environment."""
+        data = {'description': description}
+        url = '/apps/{app_name}/envs/{env_name}'.format(
+            app_name=app_name,
+            env_name=env_name,
+        )
+        return self.__rest_helper(url, data, method='PUT')['env']
+
+    def delete_env(self, env_name):
+        """Delete an environment."""
+        url = '/envs/{name}'.format(name=env_name)
+        return self.__rest_helper(url, method='DELETE')
+
+    def add_env_servers(self, env_name, servers):
+        """Add servers to an application environment."""
+        data = {
+            'action': 'add',
+            'servers': servers,
+        }
+        url = '/envs/{name}/servers'.format(name=env_name)
+        return self.__rest_helper(url, data, method='PATCH')['servers']
+
+    def remove_env_servers(self, env_name, servers):
+        """Remove servers from an application environment."""
+        data = {
+            'action': 'remove',
+            'servers': servers,
+        }
+        url = '/envs/{name}/servers'.format(name=env_name)
+        return self.__rest_helper(url, data, method='PATCH')['servers']
+
+    # Servers
+
+    def servers(self):
+        """Get a list of all servers."""
+        return self.__rest_helper('/servers', method='GET')['servers']
+
+    def server(self, server_id):
+        """Get a view a specific server."""
+        url = '/servers/{name}'.format(name=server_id)
+        return self.__rest_helper(url, method='GET')['server']
+
+    def delete_server(self, server_id):
+        """Delete a server from your account."""
+        url = '/servers/{name}'.format(name=server_id)
         return self.__rest_helper(url, method='DELETE')
