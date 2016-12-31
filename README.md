@@ -18,6 +18,16 @@ Provide username and api\_token credentials:
 
     client = Distelli(username=YOUR_USERNAME, api_token=YOUR_API_TOKEN)
 
+Or set environment variables:
+
+    export DISTELLI_USERNAME=YOUR_USERNAME
+    export DISTELLI_API_TOKEN=YOUR_API_TOKEN
+
+Construct `Distelli` without any credentials:
+
+    client = Distelli()
+
+
 ## Application Operations
 
 ### View your existing applications:
@@ -85,6 +95,6 @@ Install the requirements. `pip install -r requirements.txt`
 
 
 
-Run the tests with your username and API token set using the environment variables DISTELLI_USERNAME and DISTELLI_API_TOKEN:
+Run the tests with your username and API token set using the environment variables `DISTELLI_TEST_USERNAME` and `DISTELLI_TEST_API_TOKEN`:
 
-    DISTELLI_USERNAME=<username> DISTELLI_API_TOKEN=<api_token> make test
+    DISTELLI_TEST_USERNAME=<username> DISTELLI_TEST_API_TOKEN=<api_token> make test

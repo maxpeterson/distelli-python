@@ -4,6 +4,7 @@ https://www.distelli.com/docs/api/
 """
 
 import json
+import os
 from requests import Request, Session, ConnectionError, HTTPError
 
 
@@ -14,11 +15,19 @@ class DistelliException(Exception):
 class Distelli(object):
     _endpoint = 'https://api.distelli.com/'
 
-    def __init__(self, username, api_token):
+    def __init__(self, username=None, api_token=None):
         """
         Create authenticated API client.
         Provide `username` and `api_token`.
         """
+        if username is None:
+            username = os.getenv('DISTELLI_USERNAME')
+        if api_token is None:
+            api_token = os.getenv('DISTELLI_API_TOKEN')
+
+        if username is None or api_token is None:
+            raise DistelliException('No authentication details provided.')
+
         self.__username, self.__api_token = username, api_token
 
     def __rest_helper(self, url, data=None, params=None, method='GET'):
