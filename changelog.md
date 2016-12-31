@@ -2,7 +2,7 @@
 
 This project uses Semantic Versioning (2.0).
 
-# UPCOMING
+# 0.1.0
 
 * Use DISTELLI_USERNAME and DISTELLI_API_TOKEN environment variables to authenticate by default.
 * Add env and server support.
