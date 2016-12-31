@@ -27,7 +27,6 @@ Construct `Distelli` without any credentials:
 
     client = Distelli()
 
-
 ## Application operations
 
 ### View your existing applications:
@@ -117,16 +116,12 @@ Results appear as a Python dict:
       'server_count': 1,
       'servers_url': 'https://api.distelli.com/youraccount/envs/demo-app-preview/servers',
       'settings_url': 'https://api.distelli.com/youraccount/envs/demo-app-preview/settings',
-      'tags': [],
-      'vars': [{'name': 'ENV_FOLDER', 'value': '"/var/conf/env/preview"'}]}]
-
 
 ### Get details for a specific environment
 
 	client.env('demo-app-preview')
 
 Results are the same as `envs()` above, but only show the app specified.
-
 
 ### Create an environment
 
@@ -206,8 +201,6 @@ The tests will create and remove artifacts in your account.
 Create a virtualenv (e.g. `mkvirtualenv --python=$(which python3) distelli-python`)
 
 Install the requirements. `pip install -r requirements.txt`
-
-
 
 Run the tests with your username and API token set using the environment variables `DISTELLI_TEST_USERNAME` and `DISTELLI_TEST_API_TOKEN`:
 
